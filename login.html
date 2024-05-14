@@ -1,0 +1,139 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cont{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top:40%;
+            left:40%;
+            box-shadow: 20px 20px 20px rgba(rgb(149, 145, 145), green, blue);
+        }
+        h1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top:20%;
+            left:40%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fitness Club</h1>
+    <div class="cont">
+    <form action="/login" method="post">
+        Name:<input type="text" name="username" ><br>
+        password:<input type="password" name="password" required><br>
+        Don't have an account? <a href="/Signup">Signup</a><br>
+        <button type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ddd3d3;
+        }
+
+        .login-container {
+            height: 300px;
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 90%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 40px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+
+        }
+
+        a {
+            text-decoration: none;
+            margin-top: 20px;
+            color: black;
+        }
+
+        strong {
+            color: rgb(9, 9, 75);
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Fitness Club</h2>
+        <form action="/login" method="post">
+            <div class="form-group">
+
+                <input type="text" id="username" name="username" placeholder="Enter Your UserName">
+            </div>
+            <div class="form-group">
+
+                <input type="password" id="password" name="password" placeholder="Enter Password">
+            </div>
+            <div class="link">
+                <a href="/signup">Don't Have an account? <strong>Signup</strong></a>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>

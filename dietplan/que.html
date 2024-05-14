@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Pressure and Food</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-item {
+            display: inline-block;
+            width: 300px;
+            margin: 10px;
+        }
+
+        body {
+            background-image: linear-gradient(#d79447 , #f9ac54); 
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            width: 850px;
+            position: relative;
+            left: 22%;
+            box-shadow: 6px 5px 6px black;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #d3dbd7;
+        }
+
+        td {
+            background-color: #eeb5ff;
+            color: black;
+            font-weight: bold;
+        }
+
+        h2 {
+            text-align: center;
+            color: black;
+        }
+
+        #input {
+            position: relative;
+            left: 40%;
+        }
+        #chartsContainer{
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Enter Your Blood Pressure:</h2>
+    <div id="input">
+        <input type="number" id="bpInput" placeholder="Enter Your Blood Pressure">
+        <button onclick="checkBloodPressure()">Check</button>
+    </div>
+
+    <h2>Food Items Suitable for Your Blood Pressure:</h2>
+    <div id="foodTableContainer">
+        <table id="foodTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Nutrients</th>
+                </tr>
+            </thead>
+            <tbody id="foodBody">
+            </tbody>
+        </table>
+        <div id="chartsContainer">
+
+        </div>
+    </div>
+    <script>
+        function checkBloodPressure() {
+            var bp = document.getElementById("bpInput").value;
+            if (bp < 70 || bp > 120) {
+                alert('Enter Valid Input');
+                return;
+            }
+            var veg = [
+                {
+                    "name": "Spinach",
+                    "blood_pressure_range": { "min": 70, "max": 90 },
+                    "nutrients": { "potassium": "high", "magnesium": "moderate", "folate": "high" }
+                },
+                {
+                    "name": "Broccoli",
+                    "blood_pressure_range": { "min": 75, "max": 95 },
+                    "nutrients": { "fiber": "high", "potassium": "moderate", "antioxidants": "moderate" }
+                },
+                {
+                    "name": "Green Peas",
+                    "blood_pressure_range": { "min": 70, "max": 90 },
+                    "nutrients": { "vitamin K": "moderate", "vitamin C": "moderate", "fiber": "moderate" }
+                },
+                {
+                    "name": "Cucumber",
+                    "blood_pressure_range": { "min": 75, "max": 95 },
+                    "nutrients": { "hydrating": "high", "vitamin K": "moderate", "potassium": "moderate" }
+                },
+                {
+                    "name": "Sweet Potatoes",
+                    "blood_pressure_range": { "min": 80, "max": 100 },
+                    "nutrients": { "beta-carotene": "high", "fiber": "moderate", "vitamin A": "high" }
+                },
+                {
+                    "name": "Carrots",
+                    "blood_pressure_range": { "min": 80, "max": 120 },
+                    "nutrients": { "vitamin_a": "high", "potassium": "moderate" }
+                },
+                {
+                    "name": "Beets",
+                    "blood_pressure_range": { "min": 90, "max": 130 },
+                    "nutrients": { "nitrates": "high", "folate": "moderate" }
+                },
+                {
+                    "name": "Tomatoes",
+                    "blood_pressure_range": { "min": 80, "max": 120 },
+                    "nutrients": { "lycopene": "high", "potassium": "moderate" }
+                },
+                {
+                    "name": "Broccoli",
+                    "blood_pressure_range": { "min": 80, "max": 120 },
+                    "nutrients": { "vitamin_c": "high", "potassium": "moderate" }
+                },
+                {
+                    "name": "Pumpkin",
+                    "blood_pressure_range": { "min": 80, "max": 120 },
+                    "nutrients": { "vitamin_a": "high", "potassium": "moderate" }
+                }
+            ];
+
+            var fruits = [
+                {
+                    "name": "Bananas",
+                    "blood_pressure_range": { "min": 80, "max": 110 },
+                    "nutrients": { "potassium": "high", "vitamin_c": "moderate" }
+                },
+                {
+                    "name": "Berries",
+                    "blood_pressure_range": { "min": 70, "max": 100 },
+                    "nutrients": { "antioxidants": "high", "fiber": "moderate" }
+                },
+                {
+                    "name": "Watermelon",
+                    "blood_pressure_range": { "min": 75, "max": 100 },
+                    "nutrients": { "hydration": "high", "vitamin_a": "moderate" }
+                },
+                {
+                    "name": "Oranges",
+                    "blood_pressure_range": { "min": 75, "max": 100 },
+                    "nutrients": { "vitamin_c": "high", "potassium": "moderate" }
+                },
+                {
+                    "name": "Avocado",
+                    "blood_pressure_range": { "min": 70, "max": 100 },
+                    "nutrients": { "potassium": "high", "healthy_fats": "high" }
+                },
+                {
+                    "name": "Pomegranate",
+                    "blood_pressure_range": { "min": 75, "max": 100 },
+                    "nutrients": { "antioxidants": "high", "vitamin_c": "moderate" }
+                },
+                {
+                    "name": "Apples",
+                    "blood_pressure_range": { "min": 80, "max": 110 },
+                    "nutrients": { "fiber": "high", "antioxidants": "moderate" }
+                },
+                {
+                    "name": "Mango",
+                    "blood_pressure_range": { "min": 90, "max": 120 },
+                    "nutrients": { "vitamin_c": "high", "vitamin_a": "high", "natural_sugars": "high" }
+                },
+                {
+                    "name": "Pineapple",
+                    "blood_pressure_range": { "min": 85, "max": 115 },
+                    "nutrients": { "vitamin_c": "moderate", "natural_sugars": "moderate" }
+                },
+                {
+                    "name": "Kiwi",
+                    "blood_pressure_range": { "min": 88, "max": 118 },
+                    "nutrients": { "vitamin_c": "high", "potassium": "moderate", "natural_sugars": "moderate" }
+                },
+                {
+                    "name": "Pomegranate",
+                    "blood_pressure_range": { "min": 87, "max": 117 },
+                    "nutrients": { "antioxidants": "high", "vitamin_c": "moderate", "natural_sugars": "moderate" }
+                }
+            ];
+            var foodItems = [
+                {
+                    "name": "Oats",
+                    "type": "grain",
+                    "blood_pressure_range": { "min": 70, "max": 90 },
+                    "nutrients": { "fiber": "high", "beta-glucans": "high", "magnesium": "moderate" }
+                },
+                {
+                    "name": "Nuts",
+                    "type": "nut",
+                    "blood_pressure_range": { "min": 70, "max": 100 },
+                    "nutrients": { "potassium": "moderate", "magnesium": "moderate", "healthy_fats": "high" }
+                },
+                {
+                    "name": "Dairy",
+                    "type": "dairy",
+                    "blood_pressure_range": { "min": 80, "max": 110 },
+                    "nutrients": { "calcium": "high", "potassium": "moderate", "protein": "moderate" }
+                },
+                {
+                    "name": "Seeds",
+                    "type": "seed",
+                    "blood_pressure_range": { "min": 70, "max": 100 },
+                    "nutrients": { "omega-3_fatty_acids": "moderate", "fiber": "moderate", "magnesium": "moderate" }
+                },
+                {
+                    "name": "Dark Chocolate",
+                    "type": "sweet",
+                    "blood_pressure_range": { "min": 75, "max": 95 },
+                    "nutrients": { "flavonoids": "high", "antioxidants": "moderate" }
+                },
+                {
+                    "name": "Salt",
+                    "type": "seasoning",
+                    "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                    "nutrients": { "sodium": "high" }
+                },
+                {
+                    "name": "Fluids",
+                    "type": "beverage",
+                    "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                    "nutrients": { "hydration": "essential" }
+                },
+                {
+                    "name": "Caffeine",
+                    "type": "stimulant",
+                    "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                    "nutrients": { "stimulatory_effect": "temporarily raises blood pressure" }
+                },
+                {
+                    "name": "Beetroot Juice",
+                    "type": "beverage",
+                    "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                    "nutrients": { "nitrates": "may help dilate blood vessels" }
+                },
+                {
+                    "name": "Tilted Drinks",
+                    "type": "beverage",
+                    "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                    "nutrients": { "prevents abrupt blood pressure drops": "when changing positions" }
+                }
+            ];
+
+            var suitableFood = [];
+
+            veg.forEach(function (vegetable) {
+                if (bp >= vegetable.blood_pressure_range.min && bp <= vegetable.blood_pressure_range.max) {
+                    suitableFood.push({
+                        name: vegetable.name,
+                        type: "Vegetable",
+                        nutrients: vegetable.nutrients
+                    });
+                }
+            });
+
+            fruits.forEach(function (fruit) {
+                if (bp >= fruit.blood_pressure_range.min && bp <= fruit.blood_pressure_range.max) {
+                    suitableFood.push({
+                        name: fruit.name,
+                        type: "Fruit",
+                        nutrients: fruit.nutrients
+                    });
+                }
+            });
+
+            foodItems.forEach(function (foodItem) {
+                if (bp >= foodItem.blood_pressure_range.min && bp <= foodItem.blood_pressure_range.max) {
+                    suitableFood.push({
+                        name: foodItem.name,
+                        type: foodItem.type,
+                        nutrients: foodItem.nutrients
+                    });
+                }
+            });
+
+            displayFood(suitableFood);
+            generateCharts();
+        }
+
+        function displayFood(foodList) {
+            var tableBody = document.getElementById("foodBody");
+            tableBody.innerHTML = "";
+
+            foodList.forEach(function (food) {
+                var row = "<tr><td>" + food.name + "</td><td>" + food.type + "</td><td>";
+
+                for (var nutrient in food.nutrients) {
+                    row += nutrient + ": " + food.nutrients[nutrient] + "<br>";
+                }
+
+                row += "</td></tr>";
+                tableBody.innerHTML += row;
+            });
+        }
+        var vegetable = [
+            {
+                "name": "Spinach",
+                "blood_pressure_range": { "min": 70, "max": 90 },
+                "nutrients": { "potassium": "high", "magnesium": "moderate", "folate": "high" }
+            },
+            {
+                "name": "Broccoli",
+                "blood_pressure_range": { "min": 75, "max": 95 },
+                "nutrients": { "fiber": "high", "potassium": "moderate", "antioxidants": "moderate" }
+            },
+            {
+                "name": "Green Peas",
+                "blood_pressure_range": { "min": 70, "max": 90 },
+                "nutrients": { "vitamin K": "moderate", "vitamin C": "moderate", "fiber": "moderate" }
+            },
+            {
+                "name": "Cucumber",
+                "blood_pressure_range": { "min": 75, "max": 95 },
+                "nutrients": { "hydrating": "high", "vitamin K": "moderate", "potassium": "moderate" }
+            },
+            {
+                "name": "Sweet Potatoes",
+                "blood_pressure_range": { "min": 80, "max": 100 },
+                "nutrients": { "beta-carotene": "high", "fiber": "moderate", "vitamin A": "high" }
+            },
+            {
+                "name": "Carrots",
+                "blood_pressure_range": { "min": 80, "max": 120 },
+                "nutrients": { "vitamin_a": "high", "potassium": "moderate" }
+            },
+            {
+                "name": "Beets",
+                "blood_pressure_range": { "min": 90, "max": 130 },
+                "nutrients": { "nitrates": "high", "folate": "moderate" }
+            },
+            {
+                "name": "Tomatoes",
+                "blood_pressure_range": { "min": 80, "max": 120 },
+                "nutrients": { "lycopene": "high", "potassium": "moderate" }
+            },
+            {
+                "name": "Broccoli",
+                "blood_pressure_range": { "min": 80, "max": 120 },
+                "nutrients": { "vitamin_c": "high", "potassium": "moderate" }
+            },
+            {
+                "name": "Pumpkin",
+                "blood_pressure_range": { "min": 80, "max": 120 },
+                "nutrients": { "vitamin_a": "high", "potassium": "moderate" }
+            },
+            {
+                "name": "Bananas",
+                "blood_pressure_range": { "min": 80, "max": 110 },
+                "nutrients": { "potassium": "high", "vitamin_c": "moderate" }
+            },
+            {
+                "name": "Berries",
+                "blood_pressure_range": { "min": 70, "max": 100 },
+                "nutrients": { "antioxidants": "high", "fiber": "moderate" }
+            },
+            {
+                "name": "Watermelon",
+                "blood_pressure_range": { "min": 75, "max": 100 },
+                "nutrients": { "hydration": "high", "vitamin_a": "moderate" }
+            },
+            {
+                "name": "Oranges",
+                "blood_pressure_range": { "min": 75, "max": 100 },
+                "nutrients": { "vitamin_c": "high", "potassium": "moderate" }
+            },
+            {
+                "name": "Avocado",
+                "blood_pressure_range": { "min": 70, "max": 100 },
+                "nutrients": { "potassium": "high", "healthy_fats": "high" }
+            },
+            {
+                "name": "Pomegranate",
+                "blood_pressure_range": { "min": 75, "max": 100 },
+                "nutrients": { "antioxidants": "high", "vitamin_c": "moderate" }
+            },
+            {
+                "name": "Apples",
+                "blood_pressure_range": { "min": 80, "max": 110 },
+                "nutrients": { "fiber": "high", "antioxidants": "moderate" }
+            },
+            {
+                "name": "Mango",
+                "blood_pressure_range": { "min": 90, "max": 120 },
+                "nutrients": { "vitamin_c": "high", "vitamin_a": "high", "natural_sugars": "high" }
+            },
+            {
+                "name": "Pineapple",
+                "blood_pressure_range": { "min": 85, "max": 115 },
+                "nutrients": { "vitamin_c": "moderate", "natural_sugars": "moderate" }
+            },
+            {
+                "name": "Kiwi",
+                "blood_pressure_range": { "min": 88, "max": 118 },
+                "nutrients": { "vitamin_c": "high", "potassium": "moderate", "natural_sugars": "moderate" }
+            },
+            {
+                "name": "Pomegranate",
+                "blood_pressure_range": { "min": 87, "max": 117 },
+                "nutrients": { "antioxidants": "high", "vitamin_c": "moderate", "natural_sugars": "moderate" }
+            },
+            {
+                "name": "Oats",
+                "type": "grain",
+                "blood_pressure_range": { "min": 70, "max": 90 },
+                "nutrients": { "fiber": "high", "beta-glucans": "high", "magnesium": "moderate" }
+            },
+            {
+                "name": "Nuts",
+                "type": "nut",
+                "blood_pressure_range": { "min": 70, "max": 100 },
+                "nutrients": { "potassium": "moderate", "magnesium": "moderate", "healthy_fats": "high" }
+            },
+            {
+                "name": "Dairy",
+                "type": "dairy",
+                "blood_pressure_range": { "min": 80, "max": 110 },
+                "nutrients": { "calcium": "high", "potassium": "moderate", "protein": "moderate" }
+            },
+            {
+                "name": "Seeds",
+                "type": "seed",
+                "blood_pressure_range": { "min": 70, "max": 100 },
+                "nutrients": { "omega-3_fatty_acids": "moderate", "fiber": "moderate", "magnesium": "moderate" }
+            },
+            {
+                "name": "Dark Chocolate",
+                "type": "sweet",
+                "blood_pressure_range": { "min": 75, "max": 95 },
+                "nutrients": { "flavonoids": "high", "antioxidants": "moderate" }
+            },
+            {
+                "name": "Salt",
+                "type": "seasoning",
+                "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                "nutrients": { "sodium": "high" }
+            },
+            {
+                "name": "Fluids",
+                "type": "beverage",
+                "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                "nutrients": { "hydration": "essential" }
+            },
+            {
+                "name": "Caffeine",
+                "type": "stimulant",
+                "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                "nutrients": { "stimulatory_effect": "temporarily raises blood pressure" }
+            },
+            {
+                "name": "Beetroot Juice",
+                "type": "beverage",
+                "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                "nutrients": { "nitrates": "may help dilate blood vessels" }
+            },
+            {
+                "name": "Tilted Drinks",
+                "type": "beverage",
+                "blood_pressure_range": { "min": "Varies", "max": "Varies" },
+                "nutrients": { "prevents abrupt blood pressure drops": "when changing positions" }
+            }
+        ];
+
+        var chartsContainer = document.getElementById('chartsContainer');
+
+        // Function to create a donut chart for each vegetable
+        function createDonutChart(vegetable) {
+            var chartDiv = document.createElement('div');
+            chartDiv.classList.add('chart-item');
+            chartsContainer.appendChild(chartDiv);
+
+            // Title for the vegetable
+            var title = document.createElement('h3');
+            title.textContent = vegetable.name;
+            chartDiv.appendChild(title);
+
+            // Canvas for the chart
+            var canvas = document.createElement('canvas');
+            canvas.width = 200;
+            canvas.height = 200;
+            var ctx = canvas.getContext('2d');
+            // Set the text color
+            ctx.fillStyle = 'blue'; 
+            chartDiv.appendChild(canvas);
+
+            new Chart(canvas.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(vegetable.nutrients),
+                    datasets: [{
+                        data: Object.values(vegetable.nutrients).map(nutrient => 1),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false
+                }
+            });
+        }
+
+        function generateCharts() {
+            var minBP = parseInt(document.getElementById('bpInput').value);
+
+            // Clear previous charts
+            chartsContainer.innerHTML = '';
+
+            // Filter vegetables based on blood pressure range
+            var filteredVegetables = vegetable.filter(function (vegetable) {
+                return minBP >= vegetable.blood_pressure_range.min && minBP <= vegetable.blood_pressure_range.max;
+            });
+
+            // Create charts for filtered vegetables
+            filteredVegetables.forEach(function (vegetable) {
+                createDonutChart(vegetable);
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diet Plan</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  padding: 20px;
+}
+
+#mealPlan {
+  margin-bottom: 20px;
+}
+
+#mealList {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#addMealBtn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#addMealBtn:hover {
+  background-color: #0056b3;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Diet Plan</h1>
+  </header>
+  <main>
+    <section id="mealPlan">
+      <h2>My Meal Plan</h2>
+      <div id="mealList">
+        <!-- Meal items will be added here dynamically -->
+      </div>
+      <button id="addMealBtn">Add Meal</button>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const mealList = document.getElementById('mealList');
+  const addMealBtn = document.getElementById('addMealBtn');
+
+  // Function to add a meal item to the list
+  function addMeal(meal) {
+    const mealItem = document.createElement('div');
+    mealItem.textContent = meal;
+    mealList.appendChild(mealItem);
+  }
+
+  // Add meals to the list
+  addMeal("Breakfast: Scrambled eggs with spinach and whole grain toast");
+  addMeal("Snack: Greek yogurt with mixed berries");
+  addMeal("Lunch: Grilled chicken salad with mixed greens, tomatoes, cucumbers, and balsamic vinaigrette");
+  addMeal("Snack: Carrot sticks with hummus");
+  addMeal("Dinner: Baked salmon with quinoa and steamed broccoli");
+
+  // Event listener for adding a new meal
+  addMealBtn.addEventListener('click', function() {
+    const meal = prompt('Enter your meal:');
+    if (meal) {
+      addMeal(meal);
+    }
+  });
+});
+
+  </script>
+</body>
+</html>
