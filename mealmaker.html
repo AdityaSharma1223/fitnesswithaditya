@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mealmaker.css">
+    <title>Document</title>
+    <style>
+        #body {
+    background-color: rgb(228, 228, 228);
+}
+
+/* User Work */
+#page {
+    box-sizing: border-box;
+    width: 1349px;
+    height: 1400px;
+    background-color: rgb(228, 228, 228);
+    padding: 15px;
+    margin: auto;
+}
+
+#logo {
+    box-sizing: border-box;
+    height: 80px;
+    width: 100%;
+    background-color: rgb(236, 47, 47);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0px 0px 100px;
+}
+
+#image-logo {
+    width: 65px;
+}
+
+#image-mealPlanner {
+    width: 400px;
+}
+
+#user-work {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 15px 0px 0px 0px;
+    padding: 30px 100px 30px 100px;
+    height: 1275px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 1.5fr 1fr;
+    grid-gap: 50px;
+}
+
+#user-form {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+}
+
+#inputType {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 100px;
+    align-items: center;
+}
+
+#selectType {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 100px;
+    align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#height {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+}
+
+#heightRed {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+    box-shadow: 0px 0px 5px 1px red;
+}
+
+#heightRed::placeholder {
+    color: red;
+}
+
+#weight {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+}
+
+#weightRed {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+    box-shadow: 0px 0px 5px 1px red;
+}
+
+#weightRed::placeholder {
+    color: red;
+}
+
+#age {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+}
+
+#ageRed {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+    box-shadow: 0px 0px 5px 1px red;
+}
+
+#ageRed::placeholder {
+    color: red;
+}
+
+#gender {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+}
+
+#genderRed {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+    color: red;
+    box-shadow: 0px 0px 5px 1px red;
+}
+
+#activity-level {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+    text-overflow: ellipsis;
+}
+
+#activity-levelRed {
+    background-color: rgb(228, 228, 228);
+    border-radius: 15px;
+    width: 200px;
+    text-overflow: ellipsis;
+    color: red;
+    box-shadow: 0px 0px 5px 1px red;
+}
+
+#generate-meals-btn {
+    border-radius: 15px;
+    width: 200px;
+    height: 40px;
+    color: white;
+    background-color: rgb(236, 47, 47);
+    font-weight: 500;
+}
+
+#generate-meals-btn:active {
+    background-color: rgb(180, 36, 36);
+    font-size: 15px;
+}
+
+/* Meals */
+#meals {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    text-align: justify;
+    /* background-color: rgb(49, 228, 228); */
+}
+
+.meal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.mealType {
+    color: rgb(236, 47, 47);
+    font-size: large;
+    font-weight: 500;
+}
+
+.mealDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 345px;
+    height: 434px;
+    padding-bottom: 20px;
+    background-color: rgb(236, 47, 47);
+    border-radius: 20px;
+    border: 3px solid rgb(236, 47, 47);
+}
+
+.mealImage {
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.mealTitle {
+    color: rgb(255, 255, 255);
+    font-size: medium;
+    font-weight: 500;
+}
+
+.mealCalories {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+}
+
+.mealButton {
+    height: 30px;
+    width: 150px;
+    border: 1px solid white;
+    background-color: transparent;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    font-size: medium;
+    font-weight: 500;
+}
+
+.mealButton:active {
+    background-color: rgb(180, 36, 36);
+    font-size: 15px;
+}
+
+/* Recipe */
+.recipe {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(228, 228, 228);
+    border-radius: 10px;
+    padding: 20px;
+    overflow: auto;
+    box-shadow: 2px 2px 5px black;
+    height: 318px;
+}
+
+.display {
+    display: none;
+}
+
+#recipe::-webkit-scrollbar {
+    display: none;
+}
+
+table {
+    width: 80%;
+    /* border: 2px solid; */
+    line-height: 40px;
+    letter-spacing: 1px;
+}
+
+thead {
+    font-size: larger;
+    color: rgb(236, 47, 47);
+}
+
+tbody {
+    font-size: large;
+    font-weight: 500;
+}
+
+td,
+th {
+    width: 80%;
+}
+
+.ingredients {
+    text-transform: capitalize;
+}
+
+.equipment {
+    text-transform: lowercase;
+}
+
+/* media screen */
+@media (max-width:800px) {
+    #page {
+        width: auto;
+        height: auto;
+    }
+
+    #user-work {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #user-form,
+    #user-form section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-gap: 5px;
+    }
+
+    #meals {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 620px) {
+    #logo {
+        justify-content: center;
+        padding: 0px;
+    }
+
+    #image-logo {
+        display: none;
+    }
+
+    table {
+        width: 100%;
+        letter-spacing: 0px;
+    }
+}
+
+@media(max-width: 520px) {
+    #recipe {
+        width: 345px;
+    }
+
+    table {
+        line-height: 30px;
+    }
+
+    thead {
+        font-size: medium;
+        color: rgb(236, 47, 47);
+    }
+
+    tbody {
+        font-size: medium;
+    }
+}
+
+@media(max-width: 420px) {
+    #image-mealPlanner {
+        display: none;
+    }
+
+    #image-logo {
+        display: block;
+    }
+}
+
+@media(max-width: 395px) {
+    #page {
+        height: 395px;
+        width: 395px;
+    }
+}
+    </style>
+</head>
+<body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+    <body id="body">
+        <section id="page">
+            <nav id="logo">
+                <img id="image-logo"
+                    src="https://raw.githubusercontent.com/dipayanmaji/Meal-Planner-Project---Javascript-Project---j4r9b6hau0ej/master/spoons.png"
+                    alt="logo">
+                <img id="image-mealPlanner"
+                    src="https://raw.githubusercontent.com/dipayanmaji/Meal-Planner-Project---Javascript-Project---j4r9b6hau0ej/master/mealPlanner.png"
+                    alt="meal planner">
+            </nav>
+    
+            <section id="user-work">
+                <!-- User Input Section -->
+                <form id="user-form">
+                    <section id="inputType">
+                        <input class="form-control" id="height" type="number" placeholder="Enter Height (in cm)" min="1"
+                            required>
+                        <input class="form-control" id="weight" type="number" placeholder="Enter Weight (in kg)" min="1"
+                            required>
+                        <input class="form-control" id="age" type="number" placeholder="Enter Age" min="1" required>
+                    </section>
+                    <section id="selectType">
+                        <select class="form-control" name="gender" id="gender" required>
+                            <option value="">Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <select class="form-control" name="activity" id="activity-level" required>
+                            <option value="">Activity Level</option>
+                            <option value="1.375">Lightly active (exercise 1-3 days/week)</option>
+                            <option value="1.55">Moderately active (exercise 3-5 days/week)</option>
+                            <option value="1.725">Active (exercise 6-7 days/week)</option>
+                        </select>
+                    </section>
+                    <section id="button-sec">
+                        <button class="form-control" id="generate-meals-btn">Generate Meals</button>
+                    </section>
+                </form>
+                <!-- Meals Section -->
+                <section id="meals">
+    
+                </section>
+                <!-- Recipe Section -->
+                <section id="recipe" class="recipe display">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>INGREDIENTS</th>
+                                <th>EQUIPMENT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recipeList">
+    
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+        </section>
+    </body>
+    <script >
+        const heightInput = document.getElementById("height");
+const weightInput = document.getElementById("weight");
+const ageInput = document.getElementById("age");
+const genderInput = document.getElementById("gender");
+const activityLevelInput = document.getElementById("activity-level");
+
+const generateMealsButton = document.getElementById("generate-meals-btn");
+const mealsContener = document.getElementById('meals');
+const recipeContener = document.getElementById("recipe");
+const recipeList = document.getElementById("recipeList");
+
+let mealRecipe;
+
+generateMealsButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    mealsContener.innerHTML = "";
+    recipeList.innerHTML = "";
+    if (!recipeContener.classList.contains("display")) {
+        recipeContener.classList.add("display");
+    }
+    mealRecipe = {};
+
+    const height = heightInput.value;
+    const weight = weightInput.value;
+    const age = ageInput.value;
+    const gender = genderInput.value;
+    const activityLevel = activityLevelInput.value;
+
+    if (!height) heightInput.id = "heightRed";
+    if (!weight) weightInput.id = "weightRed";
+    if (!age) ageInput.id = "ageRed";
+    if (!gender) genderInput.id = "genderRed";
+    if (!activityLevel) activityLevelInput.id = "activity-levelRed";
+
+    if (height && weight && age && gender && activityLevel) {
+
+        heightInput.value = "";
+        weightInput.value = "";
+        ageInput.value = "";
+        genderInput.value = "";
+        activityLevelInput.value = "";
+
+        let bmr;
+        if (gender == "female") {
+            bmr = 655.1 + (9.563 * Number(weight)) + (1.850 * Number(height)) - (4.676 * Number(age));
+        }
+        else {
+            bmr = 66.47 + (13.75 * Number(weight)) + (5.003 * Number(height)) - (6.755 * Number(age));
+        }
+        bmr = bmr * Number(activityLevel);
+
+
+        try {
+            async function runApis() {
+                const allMeals = await fetch(`https://api.spoonacular.com/mealplanner/generate?apiKey=530c1e9ff9bd449d99fa0341c3000355&timeFrame=day&targetCalories=${bmr}`);
+                const mealsObj = await allMeals.json();
+                let mealCount = 0;
+                mealsObj.meals.forEach((eachMeal) => {
+                    mealCount++;
+
+                    const mealDiv = document.createElement("div");
+                    mealDiv.classList.add("meal");
+
+                    const mealTypeHeading = document.createElement("p");
+                    mealTypeHeading.classList.add("mealType");
+                    mealTypeHeading.textContent = mealType(mealCount);
+
+                    const mealDesDiv = document.createElement("div");
+                    mealDesDiv.classList.add("mealDescription");
+
+                    const img = document.createElement("img");
+                    img.classList.add("mealImage");
+                    img.alt = eachMeal.title;
+
+                    const mealTitle = document.createElement("p");
+                    mealTitle.classList.add("mealTitle");
+                    mealTitle.textContent = eachMeal.title;
+
+                    const mealCalories = document.createElement("p");
+                    mealCalories.classList.add("mealCalories");
+
+                    const button = document.createElement("button");
+                    button.textContent = "GET RECIPE";
+                    button.classList.add("mealButton");
+                    button.id = eachMeal.id;
+                    button.setAttribute("onclick", "getRecipe(event)");
+
+                    mealDesDiv.append(img, mealTitle, mealCalories, button);
+                    mealDiv.append(mealTypeHeading, mealDesDiv);
+                    mealsContener.append(mealDiv);
+
+                    fetch(`https://api.spoonacular.com/recipes/${eachMeal.id}/information?apiKey=530c1e9ff9bd449d99fa0341c3000355`)
+                        .then((rel) => rel.json())
+                        .then((recipeObj) => {
+                            mealRecipe[eachMeal.id] = recipeObj;
+                            img.src = recipeObj.image;
+                            mealCalories.textContent = `Calories - ${getCaloriesAmount(recipeObj.summary)}`;
+                        })
+                        .catch((error) => {
+                            console.log("Somthing error occur in recepie API");
+                        })
+                })
+            }
+            runApis();
+        }
+        catch (error) {
+            console.log("Somthing error occur in Meals API", error);
+        }
+    }
+})
+
+function mealType(mealCount) {
+    if (mealCount == 1) return "BREAKFAST";
+    if (mealCount == 2) return "LUNCH";
+    if (mealCount == 3) return "DINNER";
+}
+
+function getCaloriesAmount(str) {
+    let index2 = str.indexOf("calories");
+    let index;
+    for (let i = index2 - 2; i >= 0; i--) {
+        if (str.charAt(i) == ">") {
+            index = i;
+            break;
+        }
+    }
+    let calories = str.slice(index + 1, index2 - 1);
+    return calories;
+}
+
+function getRecipe(e) {
+    if (recipeContener.classList.contains("display")) {
+        recipeContener.classList.remove("display");
+    }
+    recipeList.innerHTML = "";
+    let recipeDetails = mealRecipe[e.target.id];
+    recipeDetails.extendedIngredients.forEach((element) => {
+        const row = document.createElement("tr");
+        const ingredients = document.createElement("td");
+        ingredients.classList.add("ingredients");
+        const equipment = document.createElement("td");
+        equipment.classList.add("equipment");
+
+        ingredients.textContent = element.name;
+        equipment.textContent = `${element.measures.us.amount} ${element.measures.us.unitLong}`;
+
+        row.append(ingredients, equipment);
+        recipeList.append(row);
+    })
+}
+
+heightInput.addEventListener("focus", () => {
+    heightInput.id = "height";
+})
+weightInput.addEventListener("focus", () => {
+    weightInput.id = "weight";
+})
+ageInput.addEventListener("focus", () => {
+    ageInput.id = "age";
+})
+genderInput.addEventListener("focus", () => {
+    genderInput.id = "gender";
+})
+activityLevelInput.addEventListener("focus", () => {
+    activityLevelInput.id = "activity-level";
+})
+    </script>
+</body>
+</html>
